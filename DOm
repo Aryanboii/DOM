@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input oninput="debouncepopulatediv()" id="firstnumber" type="text" placeholder="firstnumber"> 
+</input> <br></br>
+    <input oninput="debouncepopulatediv()" id="secondnumber" type="text" placeholder="secondnumber"> 
+</input> <br></br>
+
+<button onclick="populatediv()">Calculate sum</button> <br></br>
+<div id="finalsum"></div>
+</body>
+
+<script>
+function debouncepopulatediv(){
+
+    clearTimeout(timeout)
+    setTimeout( function() {
+        populatediv()
+    }, 100);
+}
+    
+
+
+
+
+    function populatediv(){
+        
+
+        // debouncing
+        const a = document.getElementById("firstnumber").value;
+        const b = document.getElementById("secondnumber").value;
+        //axios 
+        // const element = document.getElementById("finalsum")
+        fetch("https://sum-server.100xdevs.com/sum?a=1&b=2" +a + "&b" +b)
+      .then(function(response){
+        console.log(response);
+
+        response.text() // returning a promise
+        .then(function(ans){
+            console.log(ans);
+            document.getElementById("finalsum").innerHTML = ans;
+        })
+      })
+     
+        // element.innerHTML = parseInt(a) + parseInt(b);
+    }
+    // async function populatediv2()
+    // {
+    //     const a = document.getElementById("firstnumber").value;
+    //     const b = document.getElementById("secondnumber").value;
+
+    //     const response = await fetch("https://sum-server.100xdevs.com/sum?a=1&b=2" +a +"&b" +b)
+    //     const ans= await response.text();
+    //     document.getElementById("finalsum").innerHTML = ans;    
+    // } // it will work same as uppper code  
+
+
+</script>
+</html> 
